@@ -16,7 +16,9 @@ const fetchClients = async () => {
   try {
     const token = localStorage.getItem('token')
     // const userId = '666a9a753282db9808f1f659'
+    console.log(token)
     const userId = JSON.parse(atob(token.split('.')[1])).id //  atob() декодирует строку  закодированную в Base64  обратно в обычную строку
+    console.log(userId)
     const response = await axios.get(`http://localhost:5000/clients/${userId}`, {
       headers: {
         Authorization: `Bearer ${token}`
@@ -30,10 +32,12 @@ const fetchClients = async () => {
 
 const updateClientStatus = async (clientId, status) => {
   try {
+    console.log(status)
     const token = localStorage.getItem('token')
+    console.log(clientId)
     await axios.put(
       `http://localhost:5000/clients/${clientId}`,
-      { status },
+      { clientId, status },
       {
         headers: {
           Authorization: `Bearer ${token}`

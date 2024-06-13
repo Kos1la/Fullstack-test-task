@@ -4,17 +4,25 @@
       <table class="min-w-full bg-white border rounded-lg">
         <thead>
           <tr>
-            <!--            <th class="py-2 px-4 border-b">Account Number</th>-->
-            <th class="py-2 px-4 border-b">Name</th>
-            <th class="py-2 px-4 border-b">Responsible Person</th>
-            <th class="py-2 px-4 border-b">Status</th>
-            <th class="py-2 px-4 border-b">Actions</th>
+            <th class="py-2 px-4 border-b">Номер счета</th>
+            <th class="py-2 px-4 border-b">Фамилия</th>
+            <th class="py-2 px-4 border-b">Имя</th>
+            <th class="py-2 px-4 border-b">Отчество</th>
+            <th class="py-2 px-4 border-b">Дата рождения</th>
+            <th class="py-2 px-4 border-b">ИНН</th>
+            <th class="py-2 px-4 border-b">ФИО ответственного</th>
+            <th class="py-2 px-4 border-b">Статус</th>
+            <th class="py-2 px-4 border-b">Изменить статус</th>
           </tr>
         </thead>
         <tbody class="divide-y divide-gray-200">
           <tr v-for="client in clients" :key="client._id">
-            <!--            <td class="py-2 px-4 border-b">{{ client.accountNumber }}</td>-->
+            <td class="py-2 px-4 border-b">{{ client.bankAccountNumber }}</td>
+            <td class="py-2 px-4 border-b">{{ client.surname }}</td>
             <td class="py-2 px-4 border-b">{{ client.name }}</td>
+            <td class="py-2 px-4 border-b">{{ client.middleName }}</td>
+            <td class="py-2 px-4 border-b">{{ client.birthDate }}</td>
+            <td class="py-2 px-4 border-b">{{ client.INN }}</td>
             <td class="py-2 px-4 border-b">{{ client.responsiblePerson }}</td>
             <td class="py-2 px-4 border-b">{{ client.status }}</td>
             <td class="py-2 px-4 border-b">

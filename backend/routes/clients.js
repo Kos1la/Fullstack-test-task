@@ -5,7 +5,7 @@ const router = new Router()
 
 router.post('/', authenticate,  clientsController.create)
 router.get('/:userId', authenticate,  clientsController.get)
-router.patch('/:clientId', authenticate, clientsController.update)
+router.put('/:clientId', authenticate, clientsController.update)
 // Сделать валидацию всех входных параметров
 
 

@@ -5,8 +5,8 @@ import Client from "../models/Client.js";
 class clientsController  {
     async create(req,res) {
         try {
-            const {name,responsiblePerson,status} = req.body
-            const client = new Client({name,responsiblePerson,status})
+            const {name,responsiblePerson,status,bankAccountNumber,surname,middleName,birthDate,INN} = req.body
+            const client = new Client({name,responsiblePerson,status,bankAccountNumber,surname,middleName,birthDate,INN})
             await client.save()
             console.log('Client recorded')
             res.status(201).json({ message: 'Client recorded successfully' });
