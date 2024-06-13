@@ -15,8 +15,9 @@ const clients = ref([])
 const fetchClients = async () => {
   try {
     const token = localStorage.getItem('token')
-    const userId = localStorage.getItem('userId') // Получите userId из localStorage
-    const response = await axios.get(`http://localhost:5000/api/${userId}`, {
+    // const userId = '666a9a753282db9808f1f659'
+    const userId = JSON.parse(atob(token.split('.')[1])).id //  atob() декодирует строку  закодированную в Base64  обратно в обычную строку
+    const response = await axios.get(`http://localhost:5000/clients/${userId}`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -31,7 +32,7 @@ const updateClientStatus = async (clientId, status) => {
   try {
     const token = localStorage.getItem('token')
     await axios.put(
-      `http://localhost:5000/api/${clientId}`,
+      `http://localhost:5000/clients/${clientId}`,
       { status },
       {
         headers: {
@@ -39,7 +40,7 @@ const updateClientStatus = async (clientId, status) => {
         }
       }
     )
-    await fetchClients() // Обновите список клиентов после изменения статуса
+    await fetchClients() // Обновление списка клиентов после изменения статуса
   } catch (error) {
     console.error('Failed to update client status:', error)
   }

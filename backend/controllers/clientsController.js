@@ -35,7 +35,7 @@ class clientsController  {
         try {
             const clientId = req.params.clientId
             const { status } = req.body
-            const client = await Client.findByIdAndUpdate(clientId,{ status }, { new:true })
+            const client = await Client.findByIdAndUpdate(clientId,{ status })
             if(!client) res.status(404).json({message:"Client not found"})
             res.json(client)
         } catch (e) {
