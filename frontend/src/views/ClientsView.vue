@@ -15,7 +15,8 @@ const clients = ref([])
 const fetchClients = async () => {
   try {
     const token = localStorage.getItem('token')
-    const response = await axios.get('/clients/:userId', {
+    const userId = localStorage.getItem('userId') // Получите userId из localStorage
+    const response = await axios.get(`http://localhost:5000/api/${userId}`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -26,19 +27,19 @@ const fetchClients = async () => {
   }
 }
 
-const updateClientStatus = async (id, status) => {
+const updateClientStatus = async (clientId, status) => {
   try {
     const token = localStorage.getItem('token')
     await axios.put(
-      '/clients/:clientId',
-      { id, status },
+      `http://localhost:5000/api/${clientId}`,
+      { status },
       {
         headers: {
           Authorization: `Bearer ${token}`
         }
       }
     )
-    fetchClients() // Refresh clients after update
+    await fetchClients() // Обновите список клиентов после изменения статуса
   } catch (error) {
     console.error('Failed to update client status:', error)
   }

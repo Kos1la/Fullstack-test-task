@@ -15,7 +15,7 @@ app.use(cors())
 
 app.use(express.json())
 app.use('/auth',authRouter)
-app.use('/clients',clientRoutes)
+app.use('/api',clientRoutes)
 
 async function startApp() {
     try {

@@ -37,8 +37,10 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import axios from 'axios'
+import { useUserStore } from '@/store/user.js'
 
 const router = useRouter()
+const userStore = useUserStore()
 const loginForm = ref({
   login: '',
   password: ''
@@ -48,7 +50,13 @@ const login = async () => {
   try {
     const response = await axios.post('http://localhost:5000/auth/login', loginForm.value)
     console.log(response)
-    localStorage.setItem('token', response.data.token)
+    const { token, userId, email } = response.data
+
+    localStorage.setItem('token', token)
+    localStorage.setItem('userId', userId)
+
+    userStore.setUser(email)
+    userStore.setUser(loginForm.value.login) // // Обновляем состояние пользователя
     await router.push('/clients')
   } catch (error) {
     console.error('Login failed:', error)
